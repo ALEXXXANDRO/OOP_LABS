@@ -1,0 +1,2 @@
+D:\LABS\2 COURSE\OOP_LABS\ParserTests\obj\Debug\ParserTests.csprojAssemblyReference.cache
+D:\LABS\2 COURSE\OOP_LABS\ParserTests\obj\Debug\ParserTests.csproj.CoreCompileInputs.cache
