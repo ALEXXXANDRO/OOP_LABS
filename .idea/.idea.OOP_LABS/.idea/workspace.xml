@@ -19,7 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39be84d8-f79f-43d6-bc8e-a64f2360b33e" name="Default Changelist" comment="add reveiw branch" />
+    <list default="true" id="39be84d8-f79f-43d6-bc8e-a64f2360b33e" name="Default Changelist" comment="add first lab">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OOP_LABS/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OOP_LABS/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OOP_LABS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OOP_LABS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LAB1_PARSER/test.ini" beforeDir="false" afterPath="$PROJECT_DIR$/LAB1_PARSER/test.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OOP_LABS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_LABS.sln" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,15 +44,26 @@
     <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="OOP_LABS" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/LAB1_PARSER/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ParserTests/Tests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///C# Console" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LAB1_PARSER/parser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LAB1_PARSER/main.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LAB1_PARSER/exceptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LAB1_PARSER/ParserTests/Tests.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/LAB1_PARSER/exceptions.cs" />
-        <option value="$PROJECT_DIR$/LAB1_PARSER/main.cs" />
         <option value="$PROJECT_DIR$/LAB1_PARSER/Parser.cs" />
         <option value="$PROJECT_DIR$/LAB1_PARSER/Program.cs" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/parser.cs" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/exceptions.cs" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/main.cs" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/test.ini" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/ParserTests/Tests.cs" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/Tests.cs" />
+        <option value="$PROJECT_DIR$/LAB1_PARSER/TestsFunc.cs" />
+        <option value="$PROJECT_DIR$/ParserTests/Tests.cs" />
       </list>
     </option>
   </component>
@@ -61,11 +77,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="preferences.build.unityPlugin" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.LAB1_PARSER">
     <configuration name="LAB1_PARSER" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -96,13 +111,22 @@
       <option name="presentableId" value="Default" />
       <updated>1602149104985</updated>
       <workItem from="1602149115683" duration="1832000" />
+      <workItem from="1602150992836" duration="6159000" />
     </task>
+    <task id="LOCAL-00001" summary="add first lab">
+      <created>1602151298135</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602151298135</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -114,42 +138,61 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="add first lab" />
+    <option name="LAST_COMMIT_MESSAGE" value="add first lab" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="542" y="279" key="Github.CreatePullRequestDialog" timestamp="1602150723538">
+    <state x="535" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602151244036">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="542" y="279" key="Github.CreatePullRequestDialog/0.0.1536.824@0.0.1536.824" timestamp="1602150723538" />
-    <state x="646" y="310" key="Github.ShareDialog" timestamp="1602150275497">
+    <state x="535" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1602151244036" />
+    <state x="542" y="279" key="Github.CreatePullRequestDialog" timestamp="1602151352838">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="646" y="310" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1602150275497" />
-    <state x="561" y="118" key="Github.UntrackedFilesDialog" timestamp="1602150304628">
+    <state x="542" y="279" key="Github.CreatePullRequestDialog/0.0.1536.824@0.0.1536.824" timestamp="1602151352838" />
+    <state x="646" y="310" key="Github.ShareDialog" timestamp="1602151013188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="561" y="118" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602150304628" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1602150962764">
+    <state x="646" y="310" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1602151013188" />
+    <state x="561" y="118" key="Github.UntrackedFilesDialog" timestamp="1602151020513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602150962764" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1602150962764">
+    <state x="561" y="118" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602151020513" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1602157906353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602150962764" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1602150962764">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602157906353" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1602157906353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602150962764" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1602150962764">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602157906353" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1602157906353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602150962764" />
-    <state x="361" y="144" key="Rider.ProjectTemplateDialog.Size" timestamp="1602150903590">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602157906353" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1602157906353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="144" key="Rider.ProjectTemplateDialog.Size/0.0.1536.824@0.0.1536.824" timestamp="1602150903590" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602157906353" />
+    <state x="361" y="144" key="Rider.ProjectTemplateDialog.Size" timestamp="1602153422050">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="144" key="Rider.ProjectTemplateDialog.Size/0.0.1536.824@0.0.1536.824" timestamp="1602153422050" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1602158249815">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602158249815" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1602151306220">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602151306219" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1602157764044">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602157764044" />
   </component>
 </project>
