@@ -75,13 +75,8 @@ namespace Lab1Parser
                         else
                         {
                             keyPair = strLine.Split(new char[] {'='}, 2);
-                                    
-                            String value = null;
-                            SectionPair sectionPair = new SectionPair(currentRoot,keyPair[0]);
-                                    
-                            if (keyPair.Length > 1)
-                                value = keyPair[1].Remove(0, 1); // лишний пробел вначале
-
+                            String value = keyPair[1].Trim();
+                            SectionPair sectionPair = new SectionPair(currentRoot.Trim(),keyPair[0].Trim());
                             this.keyPairs.Add(sectionPair, value);
                         }
                     }
@@ -112,7 +107,7 @@ namespace Lab1Parser
         /// <param name="settingName">Key name.</param>
         public T GetSetting<T>(String sectionName, String settingName)
         {
-            SectionPair sectionPair = new SectionPair(sectionName, settingName + ' ');
+            SectionPair sectionPair = new SectionPair(sectionName, settingName);
             if (keyPairs.ContainsKey(sectionPair))
             {
                 try
