@@ -5,6 +5,7 @@
     <e p="C:\Users\ALEXXXANDRO\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_OOP_LABS.-1614837805.00" t="ExcludeRecursive" />
     <e p="D:\LABS\2 COURSE\OOP_LABS" t="IncludeFlat">
       <e p="LAB1_PARSER" t="IncludeRecursive">
+        <e p=".gitignore" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="exceptions.cs" t="Include" />
         <e p="LAB1_PARSER.csproj" t="IncludeRecursive" />
