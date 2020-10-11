@@ -1,6 +1,6 @@
 using System;
 
-namespace LAB1_PARSER
+namespace Lab1Parser
 {
     public class IniUnknownSettingnameException : Exception
     {

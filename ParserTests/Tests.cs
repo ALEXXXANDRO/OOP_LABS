@@ -1,13 +1,13 @@
 ﻿using System;
 using NUnit.Framework;
-using LAB1_PARSER;
+using Lab1Parser;
 
 namespace ParserTests
 {
     [TestFixture]
     public class Tests
     {
-        ini_parser parser = new ini_parser("D:\\LABS\\2 COURSE\\OOP_LABS\\LAB1_PARSER\\test.ini");
+        ini_parser parser = new ini_parser("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab1Parser\\test.ini");
         
         [Test]
         public void GetStringTest()
