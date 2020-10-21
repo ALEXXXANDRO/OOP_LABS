@@ -12,15 +12,15 @@ namespace Shop
 
     public class ProductInShop: Product
     {
-        public int ID;
-        public int price;
-        public int count;
+        public int ProductID;
+        public int Price;
+        public int Count;
 
         public ProductInShop(int ID, string name, int price, int count ) : base(name)
         {
-            this.price = price;
-            this.count = count;
-            this.ID = ID;
+            this.Price = price;
+            this.Count = count;
+            this.ProductID = ID;
         }
     }
 }

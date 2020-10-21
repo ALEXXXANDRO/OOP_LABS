@@ -19,16 +19,17 @@ namespace Shop
             {
                 if (ShopList[i].ProductList.ContainsKey(ID))
                 {
-                    if (minPrice > ShopList[i].ProductList[ID].price)
+                    if (minPrice > ShopList[i].ProductList[ID].Price)
                     {
-                        minPrice = ShopList[i].ProductList[ID].price;
+                        minPrice = ShopList[i].ProductList[ID].Price;
                         result = ShopList[i];
                     }
                 }
             }
 
             if (result == null) {return "OOPS";}
-            return result.name;
+            return result.Name;
         }
+       
     }
 }
