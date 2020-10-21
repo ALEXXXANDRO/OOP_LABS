@@ -15,10 +15,12 @@ namespace Shop
             RogueShop.AddProducts(1,"apple",12, 10);
             RogueShop.AddProducts(1,"apple",0,0);
             
-            Console.WriteLine(Manager.manager.FindCheaperShop(1));
+            Console.WriteLine(Manager.manager.WhereOneProductCheaper(1));
             Console.WriteLine(RogueShop.WhatCanYouBuy(100));
-            
+            Console.WriteLine(WarriorShop.ProductList[1].Count);
             Console.WriteLine(WarriorShop.BuyProducts(1, 4, 2, 2, 3, 1));
+            Console.WriteLine(WarriorShop.ProductList[1].Count);
+            Console.WriteLine(Manager.manager.WhereConsignmentCheaper(1,2));
         }
     }
 }

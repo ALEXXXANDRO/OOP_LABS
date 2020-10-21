@@ -8,11 +8,11 @@ namespace Shop
         {
         }
     }
-    
     public class UnknownProduct : Exception
     {
         public UnknownProduct(string message) : base(message)
         {
         }
     }
+    
 }

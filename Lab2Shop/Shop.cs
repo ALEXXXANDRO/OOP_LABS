@@ -73,18 +73,36 @@ namespace Shop
             return buyList;
         }
         
-        public int BuyProducts(params int[] lst)
+        public int CostEstimate(params int[] lst)
         {
             int resPrice = 0;
             for (int i = 0; i < lst.Length; i +=2 )
             {
-                if (!ProductList.ContainsKey(lst[i])) { throw new UnknownProduct("Такого товара в магазине нет"); }
-                if (lst[i+1] > ProductList[lst[i]].Count) {throw new NotEnoughProducts("В магазине нехватает продуктов");}
-                resPrice += ProductList[lst[i]].Price * lst[i+1];
-                
+                if (!ProductList.ContainsKey(lst[i]) || (lst[i+1] > ProductList[lst[i]].Count))
+                {
+                    resPrice = Int32.MaxValue;
+                }
+                else
+                {
+                    resPrice += ProductList[lst[i]].Price * lst[i + 1];
+                }
             }
             return resPrice;
         }
-
+        
+        /// <summary>
+        /// Использует метод CostEstimate. В случае удачного завершения, удаляет товары из магазина
+        /// </summary>
+        public int BuyProducts(params int[] lst)
+        {
+            int resPrice = CostEstimate(lst);
+            if (resPrice == Int32.MaxValue) {throw new NotEnoughProducts("В магазине недостаточно продуктов");}
+            for (int i = 0; i < lst.Length; i += 2)
+            {
+                ProductList[lst[i]].Count -= lst[i+1];
+            }
+            return resPrice;
+        }
+      
     }
 }
