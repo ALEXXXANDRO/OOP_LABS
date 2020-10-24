@@ -9,6 +9,8 @@ namespace Shop
             Shop WarriorShop = new Shop("WarriorShop", "Orgrimmar");
             Shop MagicShop = new Shop("MagicShop", "Bracada");
             Shop RogueShop = new Shop("RogueShop","Ratway");
+            
+            
             WarriorShop.AddProducts(1,"apple", 4,15);
             WarriorShop.AddProducts(2,"sword", 2,100);
             WarriorShop.AddProducts(3,"megaapple", 4,150);

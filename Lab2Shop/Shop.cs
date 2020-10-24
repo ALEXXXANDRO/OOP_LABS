@@ -6,7 +6,7 @@ namespace Shop
 {
     public class Shop
     {
-        public static int nextShopID = 1;
+        private static int nextShopID = 1;
         public int ShopID;
         public string Name;
         public string Address;
@@ -24,7 +24,7 @@ namespace Shop
         /// <summary>
         /// Если у товара совпало название и ID - происходит завоз товара.
         /// Если одно и то же название, но разный ID - привезли другой сорт товара (ID ДРУГОЙ)
-        /// Если один и тот же ID, но разные названия - произошла ошибка (словарь ее обработает)
+        /// Если один и тот же ID, но разные названия - произошла ошибка 
         /// </summary>
         public void AddProducts(int productID, string name, int count, int price)
         {
@@ -63,7 +63,10 @@ namespace Shop
                     countOfProduct /= ProductList[i].Price;
                 }
 
-                if (countOfProduct > ProductList[i].Count) { countOfProduct = ProductList[i].Count; }
+                if (countOfProduct > ProductList[i].Count)
+                {
+                    countOfProduct = ProductList[i].Count;
+                }
                 buyList += $"Вы можете купить {countOfProduct} {ProductList[i].name} \n";
             }
             if (buyList == $"В магазине {this.Name} \n")
