@@ -13,6 +13,8 @@ namespace Shop
         /// </summary>
         public string WhereOneProductCheaper(int ID)
         {
+            if (ShopList.Count == 0) {throw new NoShop("В городе нет ни одного магазина");}
+            
             Shop result = null;
             int minPrice = Int32.MaxValue;
             for (int i = 0; i < ShopList.Count; i++)
@@ -24,7 +26,7 @@ namespace Shop
                 }
             }
 
-            if (result == null) {return "OOPS";}
+            if (result == null) {throw new UnknownProduct("Такого товара нет ни в одном магазине");}
             return result.Name;
         }
 
@@ -33,6 +35,8 @@ namespace Shop
         /// </summary>
         public string WhereConsignmentCheaper(params int[] lst)
         {
+            if (ShopList.Count == 0) {throw new NoShop("В городе нет ни одного магазина");}
+            
             Shop result = null;
             int minPrice = Int32.MaxValue;
             for (int i = 0; i < ShopList.Count; i++)
@@ -44,8 +48,11 @@ namespace Shop
                 }
 
             }
+            if (result == null) {throw new UnknownProduct("Такого товара нет ни в одном магазине");}
             return result.Name;
         }
        
     }
+    
+    
 }

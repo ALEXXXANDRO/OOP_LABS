@@ -14,5 +14,12 @@ namespace Shop
         {
         }
     }
+
+    public class NoShop : Exception
+    {
+        public NoShop(string message) : base(message)
+        {
+        }
+    }
     
 }

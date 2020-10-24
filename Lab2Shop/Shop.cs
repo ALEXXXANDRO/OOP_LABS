@@ -21,30 +21,18 @@ namespace Shop
             Manager.manager.ShopList.Add(this);
         }
         
-        /// <summary>
-        /// Если у товара совпало название и ID - происходит завоз товара.
-        /// Если одно и то же название, но разный ID - привезли другой сорт товара (ID ДРУГОЙ)
-        /// Если один и тот же ID, но разные названия - произошла ошибка 
-        /// </summary>
-        public void AddProducts(int productID, string name, int count, int price)
+        public void AddProduct(Product product, int count, int price)
         {
-            if (ProductList.ContainsKey(productID) && ProductList[productID].name == name)
+            if (ProductList.ContainsKey(product.ProductID))
             {
-                ProductList[productID].Count += count;
-                ProductList[productID].Price = price;
+                ProductList[product.ProductID].Count += count;
+                ProductList[product.ProductID].Price = price;
             }
             
             else
             {
-                try
-                {
-                    ProductInShop productInShop = new ProductInShop(productID, name, price, count);
+                ProductInShop productInShop = new ProductInShop(product.name,price, count);
                     ProductList.Add(productInShop.ProductID, productInShop);
-                }
-                catch
-                {
-                    throw new UnknownProduct("Такого товара в магазине нет");
-                }
             }
         }
         
@@ -106,6 +94,5 @@ namespace Shop
             }
             return resPrice;
         }
-      
     }
 }
