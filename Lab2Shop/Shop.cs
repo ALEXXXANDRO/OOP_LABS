@@ -36,9 +36,9 @@ namespace Shop
             }
         }
         
-        public string WhatCanYouBuy(int countOfMoney)
+        public Dictionary<Product, int> WhatCanYouBuy(int countOfMoney)
         {
-            string buyList = $"В магазине {this.Name} \n";
+            Dictionary<Product,int>BuyList= new Dictionary<Product, int>();
             for(int i = 1; i < ProductList.Count +1; i++)
             {
                 int countOfProduct = countOfMoney;
@@ -55,27 +55,23 @@ namespace Shop
                 {
                     countOfProduct = ProductList[i].Count;
                 }
-                buyList += $"Вы можете купить {countOfProduct} {ProductList[i].name} \n";
+                BuyList.Add(ProductList[i], countOfProduct);
             }
-            if (buyList == $"В магазине {this.Name} \n")
-            {
-                buyList = "Mагазин пуст";
-            }
-            return buyList;
+            return BuyList;
         }
         
-        public int CostEstimate(params int[] lst)
+        public int CostEstimate(params int[] estimateList)
         {
             int resPrice = 0;
-            for (int i = 0; i < lst.Length; i +=2 )
+            for (int i = 0; i < estimateList.Length; i +=2 )
             {
-                if (!ProductList.ContainsKey(lst[i]) || (lst[i+1] > ProductList[lst[i]].Count))
+                if (!ProductList.ContainsKey(estimateList[i]) || (estimateList[i+1] > ProductList[estimateList[i]].Count))
                 {
                     resPrice = Int32.MaxValue;
                 }
                 else
                 {
-                    resPrice += ProductList[lst[i]].Price * lst[i + 1];
+                    resPrice += ProductList[estimateList[i]].Price * estimateList[i + 1];
                 }
             }
             return resPrice;
