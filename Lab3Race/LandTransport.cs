@@ -14,7 +14,11 @@ namespace Lab3Race
             this.StopTime = stopTime;
             this.TransportType = "Land";
         }
-        public LandTransport(){}
+
+        public LandTransport()
+        {
+            this.TransportType = "Land";
+        }
 
         public double finishTime(double distance)
         {
