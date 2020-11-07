@@ -12,8 +12,9 @@ namespace Lab3Race
             this.DistanceReduseCoeff = distanceReduseCoeff;
             this.TransportType = "Air";
         }
+        public AirTransport(){}
         
-        public double finishTime(int distance)
+        public double finishTime(double distance)
         {
             double redusedDistance = distance - distance*DistanceReduseCoeff/100;
             double time = redusedDistance/Speed;

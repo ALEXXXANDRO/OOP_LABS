@@ -14,10 +14,11 @@ namespace Lab3Race
             this.StopTime = stopTime;
             this.TransportType = "Land";
         }
+        public LandTransport(){}
 
-        public double finishTime(int distance)
+        public double finishTime(double distance)
         {
-            int countStops = (distance/Speed)/TimeToStop;
+            int countStops = (int)(distance/Speed)/TimeToStop;
             double time = (countStops * StopTime) + distance/Speed;
             return time;
         }

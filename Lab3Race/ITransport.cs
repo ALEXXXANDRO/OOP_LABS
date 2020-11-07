@@ -4,6 +4,6 @@ namespace Lab3Race
     {
         string GetTransportType();
         
-        double finishTime(int distance);
+        double finishTime(double distance);
     }
 }
