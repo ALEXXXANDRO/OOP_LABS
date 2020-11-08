@@ -10,31 +10,26 @@ namespace Lab3Race
     public int Distance;
     public List<T> RidersList = new List<T>();
 
-    
-    
-    public Race(int distance, string raceType)
-    {
-        if (raceType != "Land" && raceType != "Air" && raceType != "Any")
-        {
-            throw new InvalidRaceType("Тип гонки может быть только Land, Air, Any");
-        }
 
+
+    public Race(int distance)
+    {
         this.Distance = distance;
-        this.RaceType = raceType;
     }
+
     public void AddRider(T rider)
     {
-        
-        if (this.RaceType!= rider.GetTransportType() && this.RaceType != "Any")
-        {
-            throw new InvalidTransportType("Тип гонки не подходит этому персонажу");
-        }
+
         RidersList.Add(rider);
     }
 
     public T GetWinner()
     {
-        if (RidersList.Count == 0) {throw new NoRiders("На гонку не зарегистрировано ни одного участника");}
+        if (RidersList.Count == 0)
+        {
+            throw new NoRiders("На гонку не зарегистрировано ни одного участника");
+        }
+
         T winner = RidersList[0];
         double winnerTime = Double.MaxValue;
         foreach (T rider in RidersList)
@@ -46,6 +41,7 @@ namespace Lab3Race
                 winner = rider;
             }
         }
+
         return winner;
     }
 

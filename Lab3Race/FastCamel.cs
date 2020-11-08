@@ -2,34 +2,28 @@ namespace Lab3Race
 {
     public class FastCamel : LandTransport
     {
-        public FastCamel(int speed, int timeToStop, int stopTime)
-            : base(speed, timeToStop, stopTime)
-        {
-
-        }
 
         public FastCamel()
         {
             this.Speed = 40;
             this.TimeToStop = 10;
-            this.StopTime = 5;
+            this.StopTime = 8;
         }
 
-        public double finishTime(int distance)
+        public override double finishTime(double distance)
         {
-            int countStops = (distance / Speed) / TimeToStop;
-            if (countStops > 2)
+            double time = base.finishTime(distance);
+            
+            int countStops = (int)(distance / Speed) / TimeToStop;
+            if (countStops > 1)
             {
-                this.StopTime += 3;
-                double time = (countStops - 2 * StopTime) + distance / Speed + 5 + 6.5;
-                return time;
+                time-=4.5;
             }
-            else
+            else if (countStops == 1)
             {
-                this.StopTime += 3;
-                double time = (countStops - 1 * StopTime) + distance / Speed + 5;
-                return time;
+                time -= 3;
             }
+            return time;
         }
     }
 }

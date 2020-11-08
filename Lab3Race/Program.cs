@@ -7,10 +7,7 @@ namespace Lab3Race
     {
         public static void Main(string[] args)
         {
-            LandTransport myTransport = new LandTransport(4, 10000, 5);
-            AirTransport myAirTransport = new AirTransport(5,12);
-            
-            Race<LandTransport> landRace = new Race<LandTransport>(40, "Land");
+            Race<LandTransport> landRace = new Race<LandTransport>(40);
             Centaur Bob = new Centaur();
             MegaBoots Sam = new MegaBoots();
 
@@ -19,7 +16,7 @@ namespace Lab3Race
             Console.WriteLine(landRace.GetWinner().Speed);
 
             
-            Race<AirTransport> airRace = new Race<AirTransport>(9999,"Air");
+            Race<AirTransport> airRace = new Race<AirTransport>(9999);
             Mortar Morgana = new Mortar();
             MagicCarpet Bill = new MagicCarpet();
             
@@ -27,6 +24,11 @@ namespace Lab3Race
             airRace.AddRider(Bill);
             Console.WriteLine(airRace.GetWinner().Speed);
 
+            Race<ITransport> allRace = new Race<ITransport>(9999);
+            allRace.AddRider(Sam);
+            allRace.AddRider(Bill);
+            
+            Console.WriteLine(allRace.GetWinner().Speed);
         }
     }
 }

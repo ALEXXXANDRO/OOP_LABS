@@ -2,27 +2,19 @@ namespace Lab3Race
 {
     public class MegaBoots : LandTransport
     {
-        public MegaBoots(int speed, int timeToStop, int stopTime)
-            : base(speed, timeToStop, stopTime)
-        {
-            
-        }
-
         public MegaBoots()
         {
             this.Speed = 6;
             this.TimeToStop = 60;
-            this.StopTime = 10;
+            this.StopTime = 5;
         }
-        public double finishTime(int distance)
+        public override double finishTime(double distance)
         {
-            int countStops = (distance/Speed)/TimeToStop;
-
-            if (countStops > 1)
+            double time =  base.finishTime(distance);
+            if ((int) (distance / Speed) / TimeToStop > 0)
             {
-                this.StopTime -= 5;
-            }
-            double time = (countStops-1 * StopTime) + distance/Speed + 10;
+                time += 5;
+            };
             return time;
         }
         
