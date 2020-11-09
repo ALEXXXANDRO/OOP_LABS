@@ -27,8 +27,6 @@ namespace Lab3Race
             Race<ITransport> allRace = new Race<ITransport>(9999);
             allRace.AddRider(Sam);
             allRace.AddRider(Bill);
-            
-            Console.WriteLine(allRace.GetWinner().Speed);
         }
     }
 }
