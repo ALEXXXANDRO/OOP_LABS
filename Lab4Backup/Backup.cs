@@ -9,7 +9,7 @@ namespace Lab4Backup
     {
         private static int NextBackupID = 1;
         public int BackupID;
-        public List<string> FileList;
+        public List<FileInfo> FileList;
         public List<RestorePoint> RestorePointsList;
         public long BackupSize = 0;
         
@@ -18,7 +18,7 @@ namespace Lab4Backup
         {
             this.BackupID = NextBackupID;
             NextBackupID += 1;
-            this.FileList = new List<string>();
+            this.FileList = new List<FileInfo>();
             this.RestorePointsList = new List<RestorePoint>();
             BackupManager.manager.BackupList.Add(this);
         }
@@ -34,9 +34,10 @@ namespace Lab4Backup
         {
             foreach (string filepath in files)
             {
-                if (!File.Exists(filepath)) throw new FileNotFoundException("Не существует файла по указанному пути " + filepath);
-                if(FileList.Contains(filepath)) throw new FileAlreadyExists("Этот файл уже хранится в бэкапе " + filepath);
-                FileList.Add(filepath);
+                if (!File.Exists(filepath)) throw new FileNotFoundException($"Не существует файла по указанному пути{0}",filepath);
+                if (IsFileInBackup(filepath))throw new FileAlreadyExists("Этот файл уже хранится в бэкапе " + filepath);
+                var fileinfo = new FileInfo(filepath);
+                FileList.Add(fileinfo);
             }
         }
 
@@ -44,10 +45,26 @@ namespace Lab4Backup
         {
             foreach (string filepath in files)
             {
-                if (!File.Exists(filepath)) throw new FileNotFoundException("Не существует файла по указанному пути " + filepath);
-                if(!FileList.Contains(filepath)) throw new NoSuchFile("В бэкапе не существует файла с таким именем" + filepath );
-                FileList.Remove(filepath);
+                if (!File.Exists(filepath)) throw new FileNotFoundException($"Не существует файла по указанному пути{0}",filepath);
+                if(!IsFileInBackup(filepath)) throw new FileNotFoundException($"В бэкапе не существует файла с таким именем{0}", filepath);
+                foreach (FileInfo file in FileList)
+                {
+                    if (file.FullName == filepath)
+                        FileList.Remove(file);
+                }
             }
+        }
+
+        public bool IsFileInBackup(string filepath)
+        {
+            bool result = false;
+            foreach (FileInfo file in FileList)
+            {
+                if (file.FullName == filepath)
+                    result = true;
+            }
+
+            return result;
         }
         
         

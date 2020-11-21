@@ -16,18 +16,16 @@ namespace Lab4Backup
             long pointSize = 0;
             foreach (string filepath in files)
             {
-                if (!backup.FileList.Contains(filepath))
+                var fileinfo = new FileInfo(filepath);
+                if(!backup.IsFileInBackup(filepath))
                 {
-                    throw new NoSuchFile("В бэкапе не существует файла с таким именем" + filepath);
+                    throw new FileNotFoundException($"В бэкапе не существует файла с таким именем{0}", filepath);
                 }
-                pointSize += filepath.Length;
+                if(!isIncrement || !backup.RestorePointsList.Last().FileList.Contains(filepath))
+                    pointSize += fileinfo.Length;
+    
+            }
 
-            }
-            if (isIncrement)
-            {
-                pointSize = pointSize - backup.RestorePointsList.Last().PointSize;
-            }
-            
             return pointSize;
         }
         public void SplitCopyАlgorithm(Backup backup, bool isIncrement, params string[] files)
