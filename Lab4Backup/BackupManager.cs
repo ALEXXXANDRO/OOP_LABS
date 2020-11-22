@@ -7,43 +7,40 @@ namespace Lab4Backup
 {
     public class BackupManager 
     {
-        public static BackupManager manager = new BackupManager();
         public List<Backup> BackupList = new List<Backup>();
-
-
-        public long GetAddedPointSize(Backup backup, bool isIncrement, params string[] files)
+        
+        public void addBackup(Backup backup)
+        {
+            BackupList.Add(backup);
+        } 
+        public long GetAddedPointSize(Backup backup, bool isIncrement)
         {
             long pointSize = 0;
-            foreach (string filepath in files)
+            foreach (FileInfo file in backup.FileList)
             {
-                var fileinfo = new FileInfo(filepath);
-                if(!backup.IsFileInBackup(filepath))
-                {
-                    throw new FileNotFoundException($"В бэкапе не существует файла с таким именем{0}", filepath);
-                }
-                if(!isIncrement || !backup.RestorePointsList.Last().FileList.Contains(filepath))
-                    pointSize += fileinfo.Length;
-    
+                if(!isIncrement) 
+                    pointSize += file.Length;
+                else if(!backup.RestorePointsList.Last().FileList.Contains(file))
+                pointSize+= file.Length;
             }
-
             return pointSize;
         }
-        public void SplitCopyАlgorithm(Backup backup, bool isIncrement, params string[] files)
+        
+        public void SplitCopyАlgorithm(Backup backup, bool isIncrement)
         {
-            long pointSize = GetAddedPointSize(backup, isIncrement, files);
-            backup.CreateRestorePoint(isIncrement,pointSize, files);
+            long pointSize = GetAddedPointSize(backup, isIncrement);
+            backup.CreateRestorePoint(isIncrement,pointSize, backup.FileList);
         }
 
-        public void JointCopyAlgorithm(Backup backup, bool isIncrement, string dirName,params string[] files)
+        public void JointCopyAlgorithm(Backup backup, bool isIncrement, string dirName)
         {
-            long pointSize = GetAddedPointSize(backup, isIncrement, files);
+            long pointSize = GetAddedPointSize(backup, isIncrement);
             DirectoryInfo dirInfo = new DirectoryInfo(@"C:\SomeDir");
-            if (!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
             dirInfo.CreateSubdirectory($@"{dirName}");
-            backup.CreateRestorePoint(isIncrement,pointSize, $@"C:\SomeDir\{dirName}");
+            var fileinfo = new FileInfo($@"C:\SomeDir\{dirName}");
+            List<FileInfo> archive = new List<FileInfo>();
+            archive.Add(fileinfo);
+            backup.CreateRestorePoint(isIncrement,pointSize,archive );
         }
 
     }

@@ -10,17 +10,18 @@ namespace Lab4Backup
         public int ID;
         public long PointSize;
         public DateTime CreationTime;
-        public string[] FileList;
+        public List<FileInfo> FileList;
         public bool IsIncrement;
+        
 
-
-        public RestorePoint(bool isIncrement, long pointSize, DateTime creationTime, params string[] files)
+        public RestorePoint(bool isIncrement, long pointSize, DateTime creationTime, List<FileInfo> fileList)
         {
             this.ID = ID;
             this.IsIncrement = isIncrement;
             this.PointSize = pointSize;
             this.CreationTime = DateTime.Now;
-            this.FileList = files;
+            FileList = new List<FileInfo>(fileList);
+            
         }
         
     }

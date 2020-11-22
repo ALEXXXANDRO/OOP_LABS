@@ -2,22 +2,30 @@ using System.Collections.Generic;
 
 namespace Lab4Backup
 {
-    public class Cleaner<T> where T : Algorithms
+    public class Cleaner<T> where T : IAlgorithms
     {
-        public List<Algorithms> AlgorithmsList  = new List<Algorithms>();
+        public List<IAlgorithms> AlgorithmsList  = new List<IAlgorithms>();
+
+        public Cleaner(params T[] usedAlgorithms)
+        {
+            foreach (T algorithm in usedAlgorithms)
+            {
+                AlgorithmsList.Add(algorithm);
+            }
+            if(AlgorithmsList.Count == 0){throw new NoOneAlgorithm("Добавьте алгоритм для удаления");}
+        } 
         public void RemovePoint(Backup backup, int extraPoints)
         {
             if (backup.RestorePointsList[extraPoints].IsIncrement == true)
             {
                 throw new RemoveError("Инкрементальная точка не должна оставаться без базовой");
             }
-            long removeSize = 0;
+            
             for (int i = 0; i < extraPoints; i++)
             {
-                removeSize += backup.RestorePointsList[i].PointSize;
+                backup.BackupSize -= backup.RestorePointsList[i].PointSize;
             }
             backup.RestorePointsList.RemoveRange(0, extraPoints);
-            backup.BackupSize -= removeSize;
         }
 
         public void addAlgoritm(T algorithm)
@@ -27,7 +35,6 @@ namespace Lab4Backup
 
         public int GetExtraPoint(bool isMax)
         {
-            if(AlgorithmsList.Count == 0){throw new NoOneAlgorithm("Добавьте алгоритм для удаления");}
             int result = AlgorithmsList[0].GetExtraPoint();
             foreach (T algorithm in AlgorithmsList)
             {

@@ -1,6 +1,6 @@
 namespace Lab4Backup
 {
-    public interface Algorithms
+    public interface IAlgorithms
     {
         int GetExtraPoint();
     }
