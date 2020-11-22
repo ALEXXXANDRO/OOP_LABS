@@ -5,7 +5,7 @@ namespace Lab4Backup
     
         public class FileAlreadyExists : Exception
         {
-            public FileAlreadyExists (string message) : base(message)
+            public FileAlreadyExists(string filepath) : base($"Этот файл уже находится в бэкапе {filepath}")
             {
             }
         }
@@ -17,7 +17,7 @@ namespace Lab4Backup
         }
         public class NoOneAlgorithm : Exception
         {
-            public NoOneAlgorithm  (string message) : base(message)
+            public NoOneAlgorithm () : base("Добавьте алгоритм для удаления")
             {
             }
         }

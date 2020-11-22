@@ -12,7 +12,7 @@ namespace Lab4Backup
             {
                 AlgorithmsList.Add(algorithm);
             }
-            if(AlgorithmsList.Count == 0){throw new NoOneAlgorithm("Добавьте алгоритм для удаления");}
+            if(AlgorithmsList.Count == 0){throw new NoOneAlgorithm();}
         } 
         public void RemovePoint(Backup backup, int extraPoints)
         {
