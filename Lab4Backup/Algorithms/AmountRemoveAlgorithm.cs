@@ -1,6 +1,9 @@
+using System;
+using System.Text.RegularExpressions;
+
 namespace Lab4Backup
 {
-    public class AmountRemoveAlgorithm : Algorithms
+    public class AmountRemoveAlgorithm : IAlgorithms
     {
         public Backup ReduceBackup;
         public int AllowedAmount;
@@ -13,14 +16,7 @@ namespace Lab4Backup
         public int GetExtraPoint()
         {
             int extraPoints = ReduceBackup.RestorePointsList.Count - AllowedAmount;
-            if (extraPoints > 0)
-            {
-                return extraPoints;
-            }
-            else
-            {
-                return 0;
-            }
+            return Math.Max(0, extraPoints);
         }
         
     }

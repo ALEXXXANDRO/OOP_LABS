@@ -1,8 +1,9 @@
 using System;
+using System.Linq;
 
 namespace Lab4Backup
 {
-    public class DateRemoveAlgorithm : Algorithms
+    public class DateRemoveAlgorithm : IAlgorithms
     {
         public Backup ReduceBackup;
         public DateTime AllowedDatetime;
@@ -14,15 +15,8 @@ namespace Lab4Backup
         }
         public int GetExtraPoint()
         {
-            int extraPoints = 0;
-            for (int i = 0; i < ReduceBackup.RestorePointsList.Count; i++)
-            {
-                if (ReduceBackup.RestorePointsList[i].CreationTime < AllowedDatetime)
-                {
-                    extraPoints += 1;
-                }
-            }
-
+            int extraPoints = ReduceBackup.RestorePointsList.Count( Point => Point.CreationTime < AllowedDatetime);
+            
             return extraPoints;
         }
     }

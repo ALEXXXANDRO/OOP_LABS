@@ -1,6 +1,6 @@
 namespace Lab4Backup
 {
-    public class SizeRemoveAlgorithm : Algorithms
+    public class SizeRemoveAlgorithm : IAlgorithms
     {
         public Backup ReduceBackup;
         public long AllowedSize;

@@ -21,7 +21,6 @@ namespace Lab4Backup
             this.PointSize = pointSize;
             this.CreationTime = DateTime.Now;
             FileList = new List<FileInfo>(fileList);
-            
         }
         
     }

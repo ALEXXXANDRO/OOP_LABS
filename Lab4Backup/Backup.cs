@@ -20,12 +20,11 @@ namespace Lab4Backup
             NextBackupID += 1;
             this.FileList = new List<FileInfo>();
             this.RestorePointsList = new List<RestorePoint>();
-            BackupManager.manager.BackupList.Add(this);
         }
 
-        public void CreateRestorePoint(bool isIncrement,long pointSize, params string[] files)
+        public void CreateRestorePoint(bool isIncrement,long pointSize, List<FileInfo> files)
         {
-            RestorePoint restorePoint = new RestorePoint(isIncrement,pointSize,DateTime.Now,files);
+            RestorePoint restorePoint = new RestorePoint(isIncrement,pointSize,DateTime.Now, files);
             RestorePointsList.Add(restorePoint);
             BackupSize += restorePoint.PointSize;
         }
@@ -34,10 +33,10 @@ namespace Lab4Backup
         {
             foreach (string filepath in files)
             {
-                if (!File.Exists(filepath)) throw new FileNotFoundException($"Не существует файла по указанному пути{0}",filepath);
-                if (IsFileInBackup(filepath))throw new FileAlreadyExists("Этот файл уже хранится в бэкапе " + filepath);
+                if (!File.Exists(filepath)) throw new FileNotFoundException();
+                if (IsFileInBackup(filepath))throw new FileAlreadyExists(filepath);
                 var fileinfo = new FileInfo(filepath);
-                FileList.Add(fileinfo);
+                this.FileList.Add(fileinfo);
             }
         }
 
@@ -57,13 +56,7 @@ namespace Lab4Backup
 
         public bool IsFileInBackup(string filepath)
         {
-            bool result = false;
-            foreach (FileInfo file in FileList)
-            {
-                if (file.FullName == filepath)
-                    result = true;
-            }
-
+            bool result = FileList.Any(file => file.FullName == filepath);
             return result;
         }
         
