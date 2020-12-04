@@ -2,7 +2,7 @@ using System;
 
 namespace Lab5Banks
 {
-    public class AccountsWithProcents : BaseBankAccount
+    public abstract class AccountsWithProcents : BaseBankAccount
     {
         public double Percent;
         public double PercentCash = 0;
