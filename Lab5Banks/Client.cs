@@ -4,10 +4,10 @@ namespace Lab5Banks
 {
     public class Client
     {
-        public string Name;
-        public string Surname;
-        public string Address;
-        public string Passport;
+        private string Name;
+        private string Surname;
+        private string Address;
+        private string Passport;
 
         public List<BaseBankAccount> BankAccountList = new List<BaseBankAccount>();
         
@@ -23,10 +23,16 @@ namespace Lab5Banks
         {
             Address = address;
             Passport = passport;
+            CheckDoubtful();
+        }
+
+        public void CheckDoubtful()
+        {
             foreach (BaseBankAccount account in BankAccountList)
             {
-                account.CheckDoubtful();
+                account.isDoubtful = (Passport == null && Address == null);
             }
         }
+        
     }
 }

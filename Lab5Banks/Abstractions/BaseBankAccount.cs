@@ -4,8 +4,8 @@ namespace Lab5Banks
 {
     public abstract class BaseBankAccount
     {
-        public Bank BankOwner;
-        public Client Owner;
+        protected Bank BankOwner;
+        protected Client Owner;
         public double Balance;
         public bool isDoubtful;
 
@@ -14,15 +14,13 @@ namespace Lab5Banks
             BankOwner = bank;
             Owner = owner;
             Balance = balance;
-            CheckDoubtful();
         }
-        
-        public void CheckDoubtful()
-        {
-            isDoubtful = !(Owner.Passport != null && Owner.Address != null);
-        }
-        
 
+        public double GetBalance()
+        {
+            return Balance;
+        }
+        
         public void TopUp(int cash)
         {
             this.Balance += cash;

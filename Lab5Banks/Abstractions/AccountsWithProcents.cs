@@ -5,8 +5,8 @@ namespace Lab5Banks
     public abstract class AccountsWithProcents : BaseBankAccount
     {
         public double Percent;
-        public double PercentCash = 0;
-        public DateTime PercentAddDay;
+        public double PercentCash;
+        private DateTime PercentAddDay;
 
         public AccountsWithProcents(Client owner, Bank bank, double balance) : base(owner, bank, balance)
         {
@@ -14,6 +14,7 @@ namespace Lab5Banks
             PercentAddDay = DateTime.Today;
             PercentCash = 0;
         }
+        
         public void AddPercents()
         {
             if (DateTime.Now < PercentAddDay + TimeSpan.FromDays(365))
