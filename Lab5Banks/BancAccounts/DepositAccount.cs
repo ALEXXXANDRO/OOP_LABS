@@ -9,7 +9,7 @@ namespace Lab5Banks
         {
             EndTime = DateTime.Now + bank.DaysToEndTime;
         }
-        public override void Withdraw(int cash)
+        public override void Withdraw(double cash)
         {
            if(DateTime.Now <= EndTime) throw new EndTimeError($"Вы не сможете снять деньги до {EndTime}");
            if(isDoubtful) throw new DoubtfulAccount();

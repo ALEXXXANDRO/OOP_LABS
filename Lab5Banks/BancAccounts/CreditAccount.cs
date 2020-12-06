@@ -7,7 +7,7 @@ namespace Lab5Banks
         public double CreditLimit;
         public double Commission;
 
-        public override void Withdraw(int cash)
+        public override void Withdraw(double cash)
         {
             if(isDoubtful) throw new DoubtfulAccount();
             if(cash + Commission> CreditLimit + this.Balance) throw new NotEnoughMoney();

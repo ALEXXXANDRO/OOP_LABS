@@ -1,6 +1,6 @@
 namespace Lab5Banks.Creators
 {
-    public class CreditAccointCreator : IAccountCreator
+    public class CreditAccountCreator : IAccountCreator
     {
         public BaseBankAccount CreateAccount(Client owner, Bank bank, double balance)
         {

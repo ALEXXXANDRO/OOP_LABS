@@ -17,7 +17,7 @@ namespace Lab5Banks
         
         public void AddPercents()
         {
-            if (DateTime.Now < PercentAddDay + TimeSpan.FromDays(365))
+            if (TimeMachine.timeMachine.MyTime < PercentAddDay + TimeSpan.FromDays(365))
             {
                 PercentCash += Balance / 100 * Percent / 365;
             }
@@ -26,7 +26,7 @@ namespace Lab5Banks
                 PercentCash += Balance / 100 * Percent / 365;
                 Balance += PercentCash;
                 PercentCash = 0;
-                PercentAddDay = DateTime.Today;
+                PercentAddDay = TimeMachine.timeMachine.MyTime;
             }
         }
     }

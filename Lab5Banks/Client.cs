@@ -5,9 +5,9 @@ namespace Lab5Banks
     public class Client
     {
         private string Name;
-        private string Surname;
-        private string Address;
-        private string Passport;
+        private string Surname; 
+        public string Address;
+        public string Passport;
 
         public List<BaseBankAccount> BankAccountList = new List<BaseBankAccount>();
         
@@ -30,7 +30,7 @@ namespace Lab5Banks
         {
             foreach (BaseBankAccount account in BankAccountList)
             {
-                account.isDoubtful = (Passport == null && Address == null);
+                account.isDoubtful = (Passport == null || Address == null);
             }
         }
         
