@@ -7,15 +7,17 @@ namespace Lab6Reports.DAL
         private static int nextID = 1;
         public string Name { get; set;}
         public Employee Leader { get; set;}
-        public List<Employee> Subordinates { get; set;}
+        public List<int> SubordinatesID { get; set;}
         
-        public Employee(string name, List<Employee> subordinates = null,  Employee leader = null) 
+        public List<Task> TaskList { get; set;}
+        
+        public Employee(string name,  Employee leader = null, List<int> subordinates = null) 
         {
             ID = nextID;
             nextID += 1;
             Name = name;
             Leader = leader;
-            Subordinates = subordinates;
+            SubordinatesID = subordinates;
         }
         
         /// конструктор для дессeриализации

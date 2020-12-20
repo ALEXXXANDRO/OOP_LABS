@@ -52,9 +52,10 @@ namespace Lab6Reports.DAL
             };
         }
 
-        public void Update(T item)
+        public void Update(T item, int id)
         {
-            Delete(item.ID);
+            Delete(id);
+            item.ID = id;
             Create(item);
         }
         
