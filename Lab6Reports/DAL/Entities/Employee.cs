@@ -9,15 +9,16 @@ namespace Lab6Reports.DAL
         public Employee Leader { get; set;}
         public List<int> SubordinatesID { get; set;}
         
-        public List<Task> TaskList { get; set;}
+        public List<int> TaskList { get; set;}
         
-        public Employee(string name,  Employee leader = null, List<int> subordinates = null) 
+        public Employee(string name, List<int> subordinates, Employee leader = null) 
         {
             ID = nextID;
             nextID += 1;
             Name = name;
             Leader = leader;
             SubordinatesID = subordinates;
+            TaskList = new List<int>();
         }
         
         /// конструктор для дессeриализации

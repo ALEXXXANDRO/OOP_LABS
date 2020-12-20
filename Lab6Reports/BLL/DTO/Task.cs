@@ -13,7 +13,7 @@ namespace Lab6Reports.BLL.DTO
         
         public TaskState State { get; set;}
 
-        public DTO.Employee Owner;
+        public DTO.Employee Owner { get; set; }
         public Task(string name, string description, Employee owner)
         {
             Name = name;

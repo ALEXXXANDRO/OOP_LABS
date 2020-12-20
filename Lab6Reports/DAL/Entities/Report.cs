@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Lab6Reports.DAL
@@ -5,18 +6,21 @@ namespace Lab6Reports.DAL
     public class Report : BaseEntities
     {
         private static int nextID = 1;
-        public List<Task> CompletedTasks { get; set;}
+
+        public DateTime CreateTime;
+        public List<int> CompletedTasksID { get; set;}
         public string Comment { get; set; }
+        public int OwnerID { get; set;}
+        public bool isDraft { get; set; }
 
-        public bool Status { get; set; }
-
-        public Report( List<Task> completedTasks, string comment, bool status)
+        public Report( string comment, int ownerID)
         {
             ID = nextID;
             nextID += 1;
-            CompletedTasks = completedTasks;
             Comment = comment;
-            Status = status;
+            OwnerID = ownerID;
+            isDraft = true;
+            CreateTime = DateTime.Today;
         }
         
         /// конструктор для дессeриализации

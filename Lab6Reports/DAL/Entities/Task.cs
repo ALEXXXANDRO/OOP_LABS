@@ -15,7 +15,8 @@ namespace Lab6Reports.DAL
         
         public TaskState State { get; set;}
 
-        public DAL.Employee Owner;
+        public DAL.Employee Owner { get; set; }
+        
         public Task(string name, string description, TaskState state, Employee owner)
         {
             ID = nextID;

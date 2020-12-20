@@ -8,11 +8,13 @@ namespace Lab6Reports.BLL.DTO
         public string Name { get; set;}
         public DTO.Employee Leader { get; set;}
         public List<int> SubordinatesID { get; set;}
-        public Employee(string name, DTO.Employee leader = null, List<int> subordinates = null)
+        public List<int> TaskList { get; set;}
+        public Employee(string name, List<int> subordinates, DTO.Employee leader = null)
         {
             Name = name;
             Leader = leader;
             SubordinatesID = subordinates;
+            TaskList = new List<int>();
         }
         
     }

@@ -37,7 +37,7 @@ namespace Lab6Reports.DAL
             var jsonString = File.ReadAllText(Path);
             var entitiesList = JsonSerializer.Deserialize<List<T>>(jsonString); 
             T entitie = entitiesList.Find(x => x.ID.Equals(id));
-
+            if(entitie == null){throw new NotFound();}
             return entitie;
         }
 
@@ -63,6 +63,7 @@ namespace Lab6Reports.DAL
         {
             List<T> entitiesList = GetAll();
             T entitie = entitiesList.Find(x => x.ID.Equals(id));
+            if(entitie == null){throw new NotFound();}
             entitiesList.Remove(entitie);
             var jsonString = JsonSerializer.Serialize(entitiesList);
             using (var sr = new StreamWriter(Path, false))

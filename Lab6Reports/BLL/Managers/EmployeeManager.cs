@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Lab6Reports.DAL;
 
 namespace Lab6Reports.BLL
 {
@@ -8,18 +7,30 @@ namespace Lab6Reports.BLL
     {
         DAL.Reposirory<DAL.Employee> _employeeReposirory;
 
-        private DAL.Employee ToDALConverter(DTO.Employee employee)
+        public DAL.Employee ToDALConverter(DTO.Employee employee)
         {
-            DAL.Employee leader = _employeeReposirory.GetAll().
-                Find(t => t.Leader.ID.Equals(employee.Leader.ID));
-            var DALEmployee = new DAL.Employee(employee.Name, leader, employee.SubordinatesID );
+            var DALEmployee = new DAL.Employee(employee.Name, employee.SubordinatesID);
+            if (employee.Leader != null)
+            {
+                DAL.Employee leader = _employeeReposirory.Get(employee.Leader.ID);
+                DALEmployee.Leader = leader;
+            }
+            DALEmployee.SubordinatesID = employee.SubordinatesID;
+            DALEmployee.TaskList = employee.TaskList;
+
             return DALEmployee;
         }
-        private DTO.Employee ToDTOConverter(DAL.Employee employee)
+        public DTO.Employee ToDTOConverter(DAL.Employee employee)
         {
-            DTO.Employee leader = GetAll().
-                Find(t => t.ID.Equals(employee.Leader.ID));
-            var DTOEmployee = new DTO.Employee(employee.Name, leader, employee.SubordinatesID );
+            var DTOEmployee = new DTO.Employee(employee.Name, employee.SubordinatesID);
+            if (employee.Leader != null)
+            {
+                DTO.Employee leader = Get(employee.Leader.ID);
+                DTOEmployee.Leader = leader;
+            }
+            DTOEmployee.SubordinatesID = employee.SubordinatesID;
+            DTOEmployee.ID = employee.ID;
+            DTOEmployee.TaskList = employee.TaskList;
             return DTOEmployee;
         }
         
@@ -28,6 +39,12 @@ namespace Lab6Reports.BLL
             var DALEmployee = ToDALConverter(employee);
             _employeeReposirory.Create(DALEmployee);
             employee.ID = DALEmployee.ID;
+            if (employee.Leader != null)
+            {
+                DTO.Employee leader = this.Get(employee.Leader.ID);
+                leader.SubordinatesID.Add(employee.ID);
+                this.Update(leader,leader.ID);
+            }
         }
 
         public DTO.Employee Get(int id)
@@ -44,8 +61,8 @@ namespace Lab6Reports.BLL
 
         public void Update(DTO.Employee employee, int id)
         { 
-            DAL.Employee dalEmployee = _employeeReposirory.GetAll().Find(t => t.ID.Equals(id));
-            _employeeReposirory.Update(dalEmployee,id);
+            DAL.Employee DALEmployee = ToDALConverter(employee);
+            _employeeReposirory.Update(DALEmployee,id);
         }
         
         public List<DTO.Employee> GetAll()
@@ -63,7 +80,7 @@ namespace Lab6Reports.BLL
 
         public EmployeeManager()
         {
-            _employeeReposirory = new Reposirory<Employee>("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Employee.json");
+            _employeeReposirory = new DAL.Reposirory<DAL.Employee>("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Employee.json");
         }
     }
 }
