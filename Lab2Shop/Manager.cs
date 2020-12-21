@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Shop
 {
-    public class Manager
+     public class Manager
     {
         public static Manager manager = new Manager();
         public List<Shop> ShopList = new List<Shop>();

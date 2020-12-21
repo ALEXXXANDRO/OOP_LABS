@@ -60,7 +60,5 @@ namespace Lab4Backup
             return result;
         }
         
-        
-        
     }
 }
