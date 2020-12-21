@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Lab6Reports.BLL.DTO
 {
-    public class TeamReport : BaseDTOEntities
+    public class TeamReportDTO : BaseDTOEntities
     {
-        public List<DTO.Report> ReportList { get; set; }
+        public List<ReportDTO> ReportList { get; set; }
         public string Description { get; set; }
-        public TeamReport(string description, List<DTO.Report> reportList)
+        public TeamReportDTO(string description, List<ReportDTO> reportList)
         {
             ReportList = reportList;
             Description = description;

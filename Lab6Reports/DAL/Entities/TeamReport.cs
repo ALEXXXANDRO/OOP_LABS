@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Lab6Reports.DAL
 {
-    public class TeamReport : BaseEntities
+    public class TeamReportDAL : BaseEntities
     {
         private static int nextID = 1;
-        public List<DAL.Report> ReportList { get; set; }
+        public List<ReportDAL> ReportList { get; set; }
         public string Description { get; set; }
-        public TeamReport(string description, List<DAL.Report> reportList)
+        public TeamReportDAL(string description, List<ReportDAL> reportList)
         {
             ID = nextID;
             nextID += 1;

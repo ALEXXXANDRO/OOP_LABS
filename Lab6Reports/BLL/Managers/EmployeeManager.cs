@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using Lab6Reports.BLL.DTO;
+using Lab6Reports.DAL;
 
 namespace Lab6Reports.BLL
 {
     public class EmployeeManager
     {
-        DAL.Reposirory<DAL.Employee> _employeeReposirory;
+        Reposirory<EmployeeDAL> _employeeReposirory;
 
-        public DAL.Employee ToDALConverter(DTO.Employee employee)
+        public EmployeeDAL ToDALConverter(EmployeeDTO employee)
         {
-            var DALEmployee = new DAL.Employee(employee.Name, employee.SubordinatesID);
+            var DALEmployee = new EmployeeDAL(employee.Name, employee.SubordinatesID);
             if (employee.Leader != null)
             {
-                DAL.Employee leader = _employeeReposirory.Get(employee.Leader.ID);
+                EmployeeDAL leader = _employeeReposirory.Get(employee.Leader.ID);
                 DALEmployee.Leader = leader;
             }
             DALEmployee.SubordinatesID = employee.SubordinatesID;
@@ -20,12 +22,12 @@ namespace Lab6Reports.BLL
 
             return DALEmployee;
         }
-        public DTO.Employee ToDTOConverter(DAL.Employee employee)
+        public EmployeeDTO ToDTOConverter(EmployeeDAL employee)
         {
-            var DTOEmployee = new DTO.Employee(employee.Name, employee.SubordinatesID);
+            var DTOEmployee = new EmployeeDTO(employee.Name, employee.SubordinatesID);
             if (employee.Leader != null)
             {
-                DTO.Employee leader = Get(employee.Leader.ID);
+                EmployeeDTO leader = Get(employee.Leader.ID);
                 DTOEmployee.Leader = leader;
             }
             DTOEmployee.SubordinatesID = employee.SubordinatesID;
@@ -34,23 +36,23 @@ namespace Lab6Reports.BLL
             return DTOEmployee;
         }
         
-        public void Add(DTO.Employee employee)
+        public void Add(EmployeeDTO employee)
         {
             var DALEmployee = ToDALConverter(employee);
             _employeeReposirory.Create(DALEmployee);
             employee.ID = DALEmployee.ID;
             if (employee.Leader != null)
             {
-                DTO.Employee leader = this.Get(employee.Leader.ID);
+                EmployeeDTO leader = this.Get(employee.Leader.ID);
                 leader.SubordinatesID.Add(employee.ID);
                 this.Update(leader,leader.ID);
             }
         }
 
-        public DTO.Employee Get(int id)
+        public EmployeeDTO Get(int id)
         {
-            DAL.Employee employee = _employeeReposirory.Get(id);
-            DTO.Employee t = ToDTOConverter(employee);
+            EmployeeDAL employee = _employeeReposirory.Get(id);
+            EmployeeDTO t = ToDTOConverter(employee);
             return t;
         }
 
@@ -59,16 +61,16 @@ namespace Lab6Reports.BLL
             _employeeReposirory.Delete(id);
         }
 
-        public void Update(DTO.Employee employee, int id)
+        public void Update(EmployeeDTO employee, int id)
         { 
-            DAL.Employee DALEmployee = ToDALConverter(employee);
+            EmployeeDAL DALEmployee = ToDALConverter(employee);
             _employeeReposirory.Update(DALEmployee,id);
         }
         
-        public List<DTO.Employee> GetAll()
+        public List<EmployeeDTO> GetAll()
         {
-            List<DAL.Employee> DALEmployeeList = _employeeReposirory.GetAll();
-            List<DTO.Employee> DTOEmployeeList = new List<DTO.Employee>();
+            List<EmployeeDAL> DALEmployeeList = _employeeReposirory.GetAll();
+            List<EmployeeDTO> DTOEmployeeList = new List<EmployeeDTO>();
             foreach (var task in DALEmployeeList)
             {
                 var t = ToDTOConverter(task);
@@ -78,9 +80,9 @@ namespace Lab6Reports.BLL
             return DTOEmployeeList;
         }
 
-        public EmployeeManager()
+        public EmployeeManager(string path)
         {
-            _employeeReposirory = new DAL.Reposirory<DAL.Employee>("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Employee.json");
+            _employeeReposirory = new DAL.Reposirory<EmployeeDAL>(path);
         }
     }
 }

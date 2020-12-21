@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Lab6Reports.DAL
 {
-    public class Report : BaseEntities
+    public class ReportDAL : BaseEntities
     {
         private static int nextID = 1;
 
-        public DateTime CreateTime;
+        public DateTime CreateTime { get; set; }
         public List<int> CompletedTasksID { get; set;}
         public string Comment { get; set; }
         public int OwnerID { get; set;}
         public bool isDraft { get; set; }
 
-        public Report( string comment, int ownerID)
+        public ReportDAL( string comment, int ownerID)
         {
             ID = nextID;
             nextID += 1;
@@ -24,6 +24,6 @@ namespace Lab6Reports.DAL
         }
         
         /// конструктор для дессeриализации
-        public Report() { }
+        public ReportDAL() { }
     }
 }

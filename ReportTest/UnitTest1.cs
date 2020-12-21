@@ -14,15 +14,19 @@ namespace ReportTest
         [Test]
         public void Test1()
         {
-            var emloyee = new Lab6Reports.BLL.DTO.Employee("Вася", new List<int>());
-            var emloyee2 = new Lab6Reports.BLL.DTO.Employee("Коля", new List<int>(),emloyee);
+            var employeePath = "D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Employee.json";
+            var taskPath = "D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Task.json";
+            var reportPath = "D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Report.json";
+            var teamReportPath = "D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\TeamReport.json";
+            var emloyee = new EmployeeDTO("Вася", new List<int>());
+            var emloyee2 = new EmployeeDTO("Коля", new List<int>(),emloyee);
             
-            var task1 = new Lab6Reports.BLL.DTO.Task("Some Problem", "1", TaskState.Open,2);
-            var task2 = new Lab6Reports.BLL.DTO.Task("KEK", "1", TaskState.Open, 2);
+            var task1 = new TaskDTO("Some Problem", "1", TaskState.Open,2);
+            var task2 = new TaskDTO("KEK", "1", TaskState.Open, 2);
             
-            var taskManager = new TaskManager();
-            var emploeeManager = new EmployeeManager();
-            var reportManager = new ReportManager();
+            var taskManager = new TaskManager(taskPath,employeePath);
+            var emploeeManager = new EmployeeManager(employeePath);
+            var reportManager = new ReportManager(taskPath,employeePath,reportPath,teamReportPath);
             
             emploeeManager.Add(emloyee);
             emploeeManager.Add(emloyee2);
@@ -33,7 +37,7 @@ namespace ReportTest
             Assert.AreEqual("Some Problem",taskManager.Get(1).Name );
             Assert.AreEqual("KEK",taskManager.Get(2).Name );
             
-            var task3 = new Lab6Reports.BLL.DTO.Task("KEK", "1", TaskState.Resolved, 2);
+            var task3 = new TaskDTO("KEK", "1", TaskState.Resolved, 2);
             taskManager.Update(task3, 2,1);
             Assert.AreEqual("KEK", taskManager.GetTaskByEditor(2).First().Name);
             Assert.AreEqual(TaskState.Resolved,taskManager.Get(1).State );
@@ -57,23 +61,23 @@ namespace ReportTest
             
             
             
-            var report1 = new Lab6Reports.BLL.DTO.Report("Nice LAB awesome Tasks", 2);
+            var report1 = new ReportDTO("Nice LAB awesome Tasks", 2);
             reportManager.AddDailyReport(report1);
             
             Assert.AreEqual("Nice LAB awesome Tasks", reportManager.GetEmloyeesReports(2).First().Comment);
             Assert.AreEqual(1, reportManager.GetSubordinatesReports(1).Count);
-            var report2 = new Lab6Reports.BLL.DTO.Report("Oh men...", 2);
+            var report2 = new ReportDTO("Oh men...", 2);
             reportManager.UpdateReport(report2,1,2);
             Assert.AreEqual("Oh men...", reportManager.GetEmloyeesReports(2).First().Comment);
             
-            var teamReport = new Lab6Reports.BLL.DTO.TeamReport("Заходят как то в бар...", new List<Report>());
+            var teamReport = new TeamReportDTO("Заходят как то в бар...", new List<ReportDTO>());
             reportManager.AddTeamReport(teamReport,1);
             Assert.AreEqual("Oh men...", reportManager.GetTeamReport(1).ReportList.First().Comment);
             
             File.Delete("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Task.json");
             File.Delete("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Employee.json");
-            File.Delete("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Reports.json");
-            File.Delete("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\TeamReports.json");
+            File.Delete("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Report.json");
+            File.Delete("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\TeamReport.json");
         }
     }
 }

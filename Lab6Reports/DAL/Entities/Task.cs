@@ -5,7 +5,7 @@ using Lab6Reports.Collections;
 
 namespace Lab6Reports.DAL
 {
-    public class Task : BaseEntities
+    public class TaskDAL : BaseEntities
     {
         public List<Triad<DateTime, int, string>> Logger { get; set;}
         
@@ -17,7 +17,7 @@ namespace Lab6Reports.DAL
 
         public int OwnerID { get; set; }
         
-        public Task(string name, string description, TaskState state, int ownerID)
+        public TaskDAL(string name, string description, TaskState state, int ownerID)
         {
             ID = nextID;
             nextID += 1;
@@ -29,7 +29,7 @@ namespace Lab6Reports.DAL
         }
         
         /// конструктор для дессeриализации
-        public Task()
+        public TaskDAL()
         { }
     }
 }

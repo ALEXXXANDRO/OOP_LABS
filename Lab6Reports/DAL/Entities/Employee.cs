@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace Lab6Reports.DAL
 {
-    public class Employee : BaseEntities
+    public class EmployeeDAL : BaseEntities
     {
         private static int nextID = 1;
         public string Name { get; set;}
-        public Employee Leader { get; set;}
+        public EmployeeDAL Leader { get; set;}
         public List<int> SubordinatesID { get; set;}
         
         public List<int> TaskList { get; set;}
         
-        public Employee(string name, List<int> subordinates, Employee leader = null) 
+        public EmployeeDAL(string name, List<int> subordinates, EmployeeDAL leader = null) 
         {
             ID = nextID;
             nextID += 1;
@@ -22,7 +22,7 @@ namespace Lab6Reports.DAL
         }
         
         /// конструктор для дессeриализации
-        public Employee()
+        public EmployeeDAL()
         {
         }
     }

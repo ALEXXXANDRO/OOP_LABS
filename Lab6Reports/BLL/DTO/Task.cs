@@ -5,7 +5,7 @@ using Lab6Reports.DAL;
 
 namespace Lab6Reports.BLL.DTO
 {
-    public class Task : BaseDTOEntities
+    public class TaskDTO : BaseDTOEntities
     {
         public List<Triad<DateTime, int, string>> Logger { get; set;}
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace Lab6Reports.BLL.DTO
         public TaskState State { get; set;}
 
         public int OwnerID { get; set; }
-        public Task(string name, string description, TaskState state , int owner)
+        public TaskDTO(string name, string description, TaskState state , int owner)
         {
             Name = name;
             Description = description;
