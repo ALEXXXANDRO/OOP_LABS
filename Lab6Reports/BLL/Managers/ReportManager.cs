@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Lab6Reports.DAL;
 
 
 namespace Lab6Reports.BLL
@@ -39,6 +40,7 @@ namespace Lab6Reports.BLL
                 reports.Add(ToDTOConverter(report));
             }
             var DTOTeamReport = new DTO.TeamReport(teamReport.Description,reports);
+            DTOTeamReport.ID = teamReport.ID;
             return DTOTeamReport;
         }
         
@@ -69,36 +71,40 @@ namespace Lab6Reports.BLL
             report.ID = DALReport.ID;
         }
 
-        public void AddTeamReport(DTO.TeamReport teamReport, DTO.Employee employee)
+        public void AddTeamReport(DTO.TeamReport teamReport, int employeeID)
         {
-            if(employee.Leader != null) {throw new ForbiddenEdit();}
-            teamReport.ReportList.AddRange(GetSubordinatesReports(employee));
+            if(_employeeManager.Get(employeeID).Leader != null) {throw new ForbiddenEdit();}
+            teamReport.ReportList.AddRange(GetSubordinatesReports(employeeID));
             _teamReportReposirory.Create(TeamReportToDALConverter(teamReport));
         }
-        
-        
-        public void UpdateReport(DTO.Report report, int id, DTO.Employee employee) 
+        public DTO.TeamReport GetTeamReport(int id)
+        {
+            DAL.TeamReport DALTeamReport = _teamReportReposirory.Get(id);
+            var t = TeamReportToDTOConverter(DALTeamReport);
+            return t;
+        }
+        public void UpdateReport(DTO.Report report, int id, int employeeID) 
         { 
-            if(!employee.ID.Equals(report.OwnerID)){throw new ForbiddenEdit();}
+            if(!employeeID.Equals(report.OwnerID)){throw new ForbiddenEdit();}
             if(!DateTime.Today.Equals(report.CreateTime) && !report.isDraft){throw new ItIsNotDraft();}
             DAL.Report DALReport = ToDALConverter(report);
             _reportReposirory.Update(DALReport,id);
         }
         
-        public List<DTO.Report>  GetSubordinatesReports(DTO.Employee employee)
+        public List<DTO.Report>  GetSubordinatesReports(int employeeID)
         {
             List<DTO.Report> DTOReportList  = new List<DTO.Report>();
-            foreach (int employeeID in employee.SubordinatesID)
+            foreach (int subordinatesID in _employeeManager.Get(employeeID).SubordinatesID)
             {
-                DTOReportList.AddRange(GetEmloyeesReports(_employeeManager.Get(employeeID)));
+                DTOReportList.AddRange(GetEmloyeesReports(subordinatesID));
             }
 
             return DTOReportList;
         }
 
-        public List<DTO.Report> GetEmloyeesReports(DTO.Employee employee)
+        public List<DTO.Report> GetEmloyeesReports(int employeeID)
         {
-            List<DAL.Report> DALReportList = _reportReposirory.GetAll().FindAll(t => t.OwnerID.Equals(employee));
+            List<DAL.Report> DALReportList = _reportReposirory.GetAll().FindAll(t => t.OwnerID.Equals(employeeID));
             List<DTO.Report> DTOReportList  = new List<DTO.Report>();
             foreach (var report in DALReportList)
             {
@@ -113,6 +119,7 @@ namespace Lab6Reports.BLL
             _employeeManager = new EmployeeManager();
             _taskManager = new TaskManager();
             _reportReposirory = new DAL.Reposirory<DAL.Report>("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\Reports.json");
+            _teamReportReposirory = new DAL.Reposirory<TeamReport>("D:\\LABS\\2 COURSE\\OOP_LABS\\Lab6Reports\\TeamReports.json");
         }
     }
 }

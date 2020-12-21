@@ -15,22 +15,21 @@ namespace Lab6Reports.DAL
         
         public TaskState State { get; set;}
 
-        public DAL.Employee Owner { get; set; }
+        public int OwnerID { get; set; }
         
-        public Task(string name, string description, TaskState state, Employee owner)
+        public Task(string name, string description, TaskState state, int ownerID)
         {
             ID = nextID;
             nextID += 1;
             Name = name;
             Description = description;
             State = state;
-            Owner = owner;
+            OwnerID = ownerID;
             Logger = new List<Triad<DateTime,int,string>>();
         }
         
         /// конструктор для дессeриализации
         public Task()
-        {
-        }
+        { }
     }
 }

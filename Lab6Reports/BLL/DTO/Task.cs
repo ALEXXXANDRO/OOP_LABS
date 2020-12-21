@@ -13,13 +13,13 @@ namespace Lab6Reports.BLL.DTO
         
         public TaskState State { get; set;}
 
-        public DTO.Employee Owner { get; set; }
-        public Task(string name, string description, Employee owner)
+        public int OwnerID { get; set; }
+        public Task(string name, string description, TaskState state , int owner)
         {
             Name = name;
             Description = description;
-            State = TaskState.Open;
-            Owner = owner;
+            State = state;
+            OwnerID = owner;
             Logger = new List<Triad<DateTime, int, string>>();
         }
     }

@@ -15,30 +15,29 @@ namespace Lab6Reports.BLL
         EmployeeManager _employeeManager;
         public DAL.Task ToDALConverter(DTO.Task task)
         {
-            DAL.Employee owner = _employeeReposirory.Get(task.Owner.ID);
-            var DALTask = new DAL.Task(task.Name, task.Description,task.State,owner);
+            DAL.Employee owner = _employeeReposirory.Get(task.OwnerID);
+            var DALTask = new DAL.Task(task.Name, task.Description,task.State,task.OwnerID);
             DALTask.Logger = task.Logger;
             return DALTask;
         }
         public DTO.Task ToDTOConverter(DAL.Task task)
         {
-            DTO.Employee owner = _employeeManager.GetAll().Find(t => t.ID.Equals(task.Owner.ID));
-            var DTOTask = new DTO.Task(task.Name, task.Description,owner);
+            var DTOTask = new DTO.Task(task.Name,task.Description,task.State,task.OwnerID);
             DTOTask.State = task.State;
             DTOTask.ID = task.ID;
             DTOTask.Logger = task.Logger;
             return DTOTask;
         }
         
-        public void Add(DTO.Task task, DTO.Employee employee)
+        public void Add(DTO.Task task, int employeeID)
         {
-            var log = new Triad<DateTime, int, string> (DateTime.Today, employee.ID, " Created " );
+            var log = new Triad<DateTime, int, string> (DateTime.Today, employeeID, " Created " );
             task.Logger.Add(log); 
             var DALTask = ToDALConverter(task);
             _taskReposirory.Create(DALTask);
             task.ID = DALTask.ID;
             
-            DTO.Employee owner = _employeeManager.Get(task.Owner.ID);
+            DTO.Employee owner = _employeeManager.Get(task.OwnerID);
             owner.TaskList.Add(task.ID);
             _employeeManager.Update(owner,owner.ID);
         }
@@ -66,11 +65,11 @@ namespace Lab6Reports.BLL
         {
             _taskReposirory.Delete(id);
         }
-        public void Update(DTO.Task task, DTO.Employee employee, int ToChangeTaskId)
+        public void Update(DTO.Task task, int employeeID, int ToChangeTaskId)
         {
             if (Get(ToChangeTaskId).State == TaskState.Resolved) { throw new ResolvedTask();}
-            var discriptionLog = $"Update : task.Name = {task.Name} task.owner = {task.Owner.ID}, task.description = {task.Description}, task.state = {task.State}";
-            var log = new Triad<DateTime, int, string> (DateTime.Now, employee.ID, discriptionLog);
+            var discriptionLog = $"Update : task.Name = {task.Name} task.ownerID = {task.OwnerID}, task.description = {task.Description}, task.state = {task.State}";
+            var log = new Triad<DateTime, int, string> (DateTime.Now, employeeID, discriptionLog);
             DAL.Task DALTask = _taskReposirory.GetAll().Find(t => t.ID.Equals(ToChangeTaskId));
             task.Logger.AddRange(DALTask.Logger);
             task.Logger.Add(log);
@@ -85,19 +84,19 @@ namespace Lab6Reports.BLL
         {
             return GetAll().FindAll(t => t.Logger.Last().First.Equals(date));
         }
-        public List<DTO.Task> GetTaskByOwner(DTO.Employee employee)
+        public List<DTO.Task> GetTaskByOwner(int employeeID)
         {
-            return GetAll().FindAll(t => t.Owner.Equals(employee));
+            return GetAll().FindAll(t => t.OwnerID.Equals(employeeID));
         }
-        public List<DTO.Task> GetTaskByEditor(DTO.Employee employee)
+        public List<DTO.Task> GetTaskByEditor(int employeeID)
         {
             return GetAll().FindAll(t => t.Logger.FindAll(editor 
-                => editor.Second.Equals(employee.ID)).Count > 0);
+                => editor.Second.Equals(employeeID)).Count > 0);
         }
-        public List<int> GetSubordinatesTasks(DTO.Employee employee)
+        public List<int> GetSubordinatesTasks(int employeeID)
         {
             var TaskList = new List<int>();
-            foreach (int EmploeeID in employee.SubordinatesID)
+            foreach (int EmploeeID in _employeeManager.Get(employeeID).SubordinatesID)
             {
                List<int> tmpList = _employeeReposirory.Get(EmploeeID).TaskList;
                TaskList.AddRange(tmpList);
@@ -105,11 +104,11 @@ namespace Lab6Reports.BLL
 
             return TaskList;
         }
-        public List<int> GetResolvedDailyTasks(DTO.Employee employee)
+        public List<int> GetResolvedDailyTasks(int employeeID)
         {
             
             var TaskList = new List<int>();
-            foreach (int taskID  in employee.TaskList)
+            foreach (int taskID  in _employeeManager.Get(employeeID).TaskList)
             {
                 DTO.Task task = Get(taskID);
                 if (task.State == TaskState.Resolved && task.Logger.Last().First - DateTime.Today < TimeSpan.FromDays(1))
@@ -120,10 +119,10 @@ namespace Lab6Reports.BLL
 
             return TaskList;
         }
-        public List<int> GetResolvedTasks(DTO.Employee employee)
+        public List<int> GetResolvedTasks(int employeeID )
         {
             var TaskList = new List<int>();
-            foreach (int taskID  in employee.TaskList)
+            foreach (int taskID  in _employeeManager.Get(employeeID).TaskList)
             {
                 DTO.Task task = Get(taskID);
                 if (task.State == TaskState.Resolved)
